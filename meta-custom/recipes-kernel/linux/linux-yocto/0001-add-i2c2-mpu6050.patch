@@ -1,0 +1,25 @@
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2025
+From: Your Name <your@email.com>
+Date: Thu, 25 Jun 2026 17:00:00 +0200
+Subject: [PATCH] beaglebone: add mpu6050 on i2c2
+
+Upstream-Status: Inappropriate [board-specific]
+
+diff --git a/arch/arm/boot/dts/ti/omap/am335x-boneblack.dts b/arch/arm/boot/dts/ti/omap/am335x-boneblack.dts
+index 16b567e..07044d3 100644
+--- a/arch/arm/boot/dts/ti/omap/am335x-boneblack.dts
++++ b/arch/arm/boot/dts/ti/omap/am335x-boneblack.dts
+@@ -173,3 +173,13 @@
+ &baseboard_eeprom {
+        vcc-supply = <&ldo4_reg>;
+ };
++
++&i2c2 {
++        status = "okay";
++        clock-frequency = <100000>;
++
++        mpu6050@68 {
++                compatible = "invensense,mpu6050";
++                reg = <0x68>;
++        };
++};
