@@ -1,1 +1,1 @@
-savedcmd_modules.order := {   echo mpu6050.o; :; } > modules.order
+savedcmd_/home/par/Documents/Learning/yocto-bbb/yocto_sandbox/kernel-driver/src/modules.order := {   echo /home/par/Documents/Learning/yocto-bbb/yocto_sandbox/kernel-driver/src/mpu6050.o; :; } > /home/par/Documents/Learning/yocto-bbb/yocto_sandbox/kernel-driver/src/modules.order

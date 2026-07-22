@@ -1,1 +1,1 @@
-savedcmd_Module.symvers :=  /usr/src/linux-headers-6.17.0-35-generic/scripts/mod/modpost -M -m -b -x -a      -o Module.symvers -T modules.order -i /usr/src/linux-headers-6.17.0-35-generic/Module.symvers -e 
+savedcmd_/home/par/Documents/Learning/yocto-bbb/yocto_sandbox/kernel-driver/src/Module.symvers :=  scripts/mod/modpost -M        -o /home/par/Documents/Learning/yocto-bbb/yocto_sandbox/kernel-driver/src/Module.symvers -T /home/par/Documents/Learning/yocto-bbb/yocto_sandbox/kernel-driver/src/modules.order -i Module.symvers -e 

@@ -1,1 +1,1 @@
-savedcmd_mpu6050.mod := printf '%s\n'   mpu6050.o | awk '!x[$$0]++ { print("./"$$0) }' > mpu6050.mod
+savedcmd_/home/par/Documents/Learning/yocto-bbb/yocto_sandbox/kernel-driver/src/mpu6050.mod := printf '%s\n'   mpu6050.o | awk '!x[$$0]++ { print("/home/par/Documents/Learning/yocto-bbb/yocto_sandbox/kernel-driver/src/"$$0) }' > /home/par/Documents/Learning/yocto-bbb/yocto_sandbox/kernel-driver/src/mpu6050.mod

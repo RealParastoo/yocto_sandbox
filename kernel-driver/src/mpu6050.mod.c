@@ -1,7 +1,20 @@
 #include <linux/module.h>
+#define INCLUDE_VERMAGIC
+#include <linux/build-salt.h>
+#include <linux/elfnote-lto.h>
 #include <linux/export-internal.h>
+#include <linux/vermagic.h>
 #include <linux/compiler.h>
 
+#ifdef CONFIG_UNWINDER_ORC
+#include <asm/orc_header.h>
+ORC_HEADER;
+#endif
+
+BUILD_SALT;
+BUILD_LTO_INFO;
+
+MODULE_INFO(vermagic, VERMAGIC_STRING);
 MODULE_INFO(name, KBUILD_MODNAME);
 
 __visible struct module __this_module
@@ -14,32 +27,13 @@ __section(".gnu.linkonce.this_module") = {
 	.arch = MODULE_ARCH_INIT,
 };
 
+#ifdef CONFIG_RETPOLINE
+MODULE_INFO(retpoline, "Y");
+#endif
 
-
-static const struct modversion_info ____versions[]
-__used __section("__versions") = {
-	{ 0xd272d446, "__x86_return_thunk" },
-	{ 0xd272d446, "__fentry__" },
-	{ 0xe8213e80, "_printk" },
-	{ 0x814e12e5, "module_layout" },
-};
-
-static const u32 ____version_ext_crcs[]
-__used __section("__version_ext_crcs") = {
-	0xd272d446,
-	0xd272d446,
-	0xe8213e80,
-	0x814e12e5,
-};
-static const char ____version_ext_names[]
-__used __section("__version_ext_names") =
-	"__x86_return_thunk\0"
-	"__fentry__\0"
-	"_printk\0"
-	"module_layout\0"
-;
 
 MODULE_INFO(depends, "");
 
+MODULE_ALIAS("i2c:mpu6050");
 
-MODULE_INFO(srcversion, "FFFECD95958C477D92AFCDD");
+MODULE_INFO(srcversion, "B859E51629C51AE53900A36");
