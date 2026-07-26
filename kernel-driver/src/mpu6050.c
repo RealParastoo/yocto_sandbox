@@ -10,7 +10,21 @@ MODULE_VERSION("0.1");
 
 static int mpu6050_probe(struct i2c_client *client)
 {
+    int ret;
+    u8 who_am_i;
+
     pr_info("mpu6050: probe called\n");
+
+    ret = i2c_smbus_read_byte_data(client, 0x75);
+
+    if (ret < 0) {
+        pr_err("mpu6050: failed to read WHO_AM_I\n");
+        return ret;
+    }
+
+    who_am_i = ret;
+
+    pr_info("mpu6050: WHO_AM_I = 0x%02x\n", who_am_i);
 
     return 0;
 }
