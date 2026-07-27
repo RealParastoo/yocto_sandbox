@@ -25,11 +25,37 @@ deps_/home/par/Documents/Learning/yocto-bbb/yocto_sandbox/kernel-driver/src/mpu6
     $(wildcard include/config/ARCH_USE_BUILTIN_BSWAP) \
     $(wildcard include/config/SHADOW_CALL_STACK) \
     $(wildcard include/config/KCOV) \
-  /home/par/Documents/Learning/yocto-bbb/build-custom/tmp/work-shared/beaglebone-yocto/kernel-source/include/linux/init.h \
-    $(wildcard include/config/HAVE_ARCH_PREL32_RELOCATIONS) \
-    $(wildcard include/config/STRICT_KERNEL_RWX) \
-    $(wildcard include/config/STRICT_MODULE_RWX) \
-    $(wildcard include/config/LTO_CLANG) \
+  /home/par/Documents/Learning/yocto-bbb/build-custom/tmp/work-shared/beaglebone-yocto/kernel-source/include/linux/module.h \
+    $(wildcard include/config/MODULES) \
+    $(wildcard include/config/SYSFS) \
+    $(wildcard include/config/MODULES_TREE_LOOKUP) \
+    $(wildcard include/config/LIVEPATCH) \
+    $(wildcard include/config/STACKTRACE_BUILD_ID) \
+    $(wildcard include/config/ARCH_USES_CFI_TRAPS) \
+    $(wildcard include/config/MODULE_SIG) \
+    $(wildcard include/config/GENERIC_BUG) \
+    $(wildcard include/config/KALLSYMS) \
+    $(wildcard include/config/SMP) \
+    $(wildcard include/config/TRACEPOINTS) \
+    $(wildcard include/config/TREE_SRCU) \
+    $(wildcard include/config/BPF_EVENTS) \
+    $(wildcard include/config/DEBUG_INFO_BTF_MODULES) \
+    $(wildcard include/config/JUMP_LABEL) \
+    $(wildcard include/config/TRACING) \
+    $(wildcard include/config/EVENT_TRACING) \
+    $(wildcard include/config/FTRACE_MCOUNT_RECORD) \
+    $(wildcard include/config/KPROBES) \
+    $(wildcard include/config/HAVE_STATIC_CALL_INLINE) \
+    $(wildcard include/config/KUNIT) \
+    $(wildcard include/config/PRINTK_INDEX) \
+    $(wildcard include/config/MODULE_UNLOAD) \
+    $(wildcard include/config/CONSTRUCTORS) \
+    $(wildcard include/config/FUNCTION_ERROR_INJECTION) \
+    $(wildcard include/config/DYNAMIC_DEBUG_CORE) \
+  /home/par/Documents/Learning/yocto-bbb/build-custom/tmp/work-shared/beaglebone-yocto/kernel-source/include/linux/list.h \
+    $(wildcard include/config/LIST_HARDENED) \
+    $(wildcard include/config/DEBUG_LIST) \
+  /home/par/Documents/Learning/yocto-bbb/build-custom/tmp/work-shared/beaglebone-yocto/kernel-source/include/linux/container_of.h \
   /home/par/Documents/Learning/yocto-bbb/build-custom/tmp/work-shared/beaglebone-yocto/kernel-source/include/linux/build_bug.h \
   /home/par/Documents/Learning/yocto-bbb/build-custom/tmp/work-shared/beaglebone-yocto/kernel-source/include/linux/compiler.h \
     $(wildcard include/config/TRACE_BRANCH_PROFILING) \
@@ -63,40 +89,11 @@ deps_/home/par/Documents/Learning/yocto-bbb/yocto_sandbox/kernel-driver/src/mpu6
     $(wildcard include/config/KCSAN) \
     $(wildcard include/config/KCSAN_WEAK_MEMORY) \
     $(wildcard include/config/KCSAN_IGNORE_ATOMICS) \
-  /home/par/Documents/Learning/yocto-bbb/build-custom/tmp/work-shared/beaglebone-yocto/kernel-source/include/linux/stringify.h \
-  /home/par/Documents/Learning/yocto-bbb/build-custom/tmp/work-shared/beaglebone-yocto/kernel-source/include/linux/kernel.h \
-    $(wildcard include/config/PREEMPT_VOLUNTARY_BUILD) \
-    $(wildcard include/config/PREEMPT_DYNAMIC) \
-    $(wildcard include/config/HAVE_PREEMPT_DYNAMIC_CALL) \
-    $(wildcard include/config/HAVE_PREEMPT_DYNAMIC_KEY) \
-    $(wildcard include/config/PREEMPT_) \
-    $(wildcard include/config/DEBUG_ATOMIC_SLEEP) \
-    $(wildcard include/config/SMP) \
-    $(wildcard include/config/MMU) \
-    $(wildcard include/config/PROVE_LOCKING) \
-    $(wildcard include/config/TRACING) \
-    $(wildcard include/config/FTRACE_MCOUNT_RECORD) \
-  /home/par/Documents/Learning/yocto-bbb/build-custom/tmp/work-shared/beaglebone-yocto/kernel-source/include/linux/stdarg.h \
-  /home/par/Documents/Learning/yocto-bbb/build-custom/tmp/work-shared/beaglebone-yocto/kernel-source/include/linux/align.h \
+  /home/par/Documents/Learning/yocto-bbb/build-custom/tmp/work-shared/beaglebone-yocto/kernel-source/include/linux/poison.h \
+    $(wildcard include/config/ILLEGAL_POINTER_VALUE) \
   /home/par/Documents/Learning/yocto-bbb/build-custom/tmp/work-shared/beaglebone-yocto/kernel-source/include/linux/const.h \
   /home/par/Documents/Learning/yocto-bbb/build-custom/tmp/work-shared/beaglebone-yocto/kernel-source/include/vdso/const.h \
   /home/par/Documents/Learning/yocto-bbb/build-custom/tmp/work-shared/beaglebone-yocto/kernel-source/include/uapi/linux/const.h \
-  /home/par/Documents/Learning/yocto-bbb/build-custom/tmp/work-shared/beaglebone-yocto/kernel-source/include/linux/limits.h \
-  /home/par/Documents/Learning/yocto-bbb/build-custom/tmp/work-shared/beaglebone-yocto/kernel-source/include/uapi/linux/limits.h \
-  /home/par/Documents/Learning/yocto-bbb/build-custom/tmp/work-shared/beaglebone-yocto/kernel-source/include/vdso/limits.h \
-  /home/par/Documents/Learning/yocto-bbb/build-custom/tmp/work-shared/beaglebone-yocto/kernel-source/include/linux/linkage.h \
-    $(wildcard include/config/ARCH_USE_SYM_ANNOTATIONS) \
-  /home/par/Documents/Learning/yocto-bbb/build-custom/tmp/work-shared/beaglebone-yocto/kernel-source/include/linux/export.h \
-    $(wildcard include/config/MODVERSIONS) \
-  /home/par/Documents/Learning/yocto-bbb/build-custom/tmp/work-shared/beaglebone-yocto/kernel-source/arch/arm/include/asm/linkage.h \
-  /home/par/Documents/Learning/yocto-bbb/build-custom/tmp/work-shared/beaglebone-yocto/kernel-source/include/linux/container_of.h \
-  /home/par/Documents/Learning/yocto-bbb/build-custom/tmp/work-shared/beaglebone-yocto/kernel-source/include/linux/bitops.h \
-  /home/par/Documents/Learning/yocto-bbb/build-custom/tmp/work-shared/beaglebone-yocto/kernel-source/include/linux/bits.h \
-  /home/par/Documents/Learning/yocto-bbb/build-custom/tmp/work-shared/beaglebone-yocto/kernel-source/include/vdso/bits.h \
-  /home/par/Documents/Learning/yocto-bbb/build-custom/tmp/work-shared/beaglebone-yocto/kernel-source/include/linux/typecheck.h \
-  /home/par/Documents/Learning/yocto-bbb/build-custom/tmp/work-shared/beaglebone-yocto/kernel-source/include/uapi/linux/kernel.h \
-  /home/par/Documents/Learning/yocto-bbb/build-custom/tmp/work-shared/beaglebone-yocto/kernel-source/include/uapi/linux/sysinfo.h \
-  /home/par/Documents/Learning/yocto-bbb/build-custom/tmp/work-shared/beaglebone-yocto/kernel-source/include/asm-generic/bitops/generic-non-atomic.h \
   /home/par/Documents/Learning/yocto-bbb/build-custom/tmp/work-shared/beaglebone-yocto/kernel-source/arch/arm/include/asm/barrier.h \
     $(wildcard include/config/CPU_32v6K) \
     $(wildcard include/config/THUMB2_KERNEL) \
@@ -106,8 +103,35 @@ deps_/home/par/Documents/Learning/yocto-bbb/yocto_sandbox/kernel-driver/src/mpu6
     $(wildcard include/config/ARM_DMA_MEM_BUFFERABLE) \
     $(wildcard include/config/CPU_SPECTRE) \
   /home/par/Documents/Learning/yocto-bbb/build-custom/tmp/work-shared/beaglebone-yocto/kernel-source/include/asm-generic/barrier.h \
+  /home/par/Documents/Learning/yocto-bbb/build-custom/tmp/work-shared/beaglebone-yocto/kernel-source/include/linux/stat.h \
+  /home/par/Documents/Learning/yocto-bbb/build-custom/tmp/work-shared/beaglebone-yocto/kernel-source/arch/arm/include/uapi/asm/stat.h \
+  /home/par/Documents/Learning/yocto-bbb/build-custom/tmp/work-shared/beaglebone-yocto/kernel-source/include/uapi/linux/stat.h \
+  /home/par/Documents/Learning/yocto-bbb/build-custom/tmp/work-shared/beaglebone-yocto/kernel-source/include/linux/time.h \
+    $(wildcard include/config/POSIX_TIMERS) \
+  /home/par/Documents/Learning/yocto-bbb/build-custom/tmp/work-shared/beaglebone-yocto/kernel-source/include/linux/cache.h \
+    $(wildcard include/config/ARCH_HAS_CACHE_LINE_SIZE) \
+  /home/par/Documents/Learning/yocto-bbb/build-custom/tmp/work-shared/beaglebone-yocto/kernel-source/include/uapi/linux/kernel.h \
+  /home/par/Documents/Learning/yocto-bbb/build-custom/tmp/work-shared/beaglebone-yocto/kernel-source/include/uapi/linux/sysinfo.h \
+  /home/par/Documents/Learning/yocto-bbb/build-custom/tmp/work-shared/beaglebone-yocto/kernel-source/arch/arm/include/asm/cache.h \
+    $(wildcard include/config/ARM_L1_CACHE_SHIFT) \
+    $(wildcard include/config/AEABI) \
+  /home/par/Documents/Learning/yocto-bbb/build-custom/tmp/work-shared/beaglebone-yocto/kernel-source/include/linux/math64.h \
+    $(wildcard include/config/ARCH_SUPPORTS_INT128) \
+  /home/par/Documents/Learning/yocto-bbb/build-custom/tmp/work-shared/beaglebone-yocto/kernel-source/include/linux/math.h \
+  /home/par/Documents/Learning/yocto-bbb/build-custom/tmp/work-shared/beaglebone-yocto/kernel-source/arch/arm/include/asm/div64.h \
+  /home/par/Documents/Learning/yocto-bbb/build-custom/tmp/work-shared/beaglebone-yocto/kernel-source/arch/arm/include/asm/compiler.h \
+  /home/par/Documents/Learning/yocto-bbb/build-custom/tmp/work-shared/beaglebone-yocto/kernel-source/include/asm-generic/div64.h \
+  /home/par/Documents/Learning/yocto-bbb/build-custom/tmp/work-shared/beaglebone-yocto/kernel-source/include/linux/log2.h \
+    $(wildcard include/config/ARCH_HAS_ILOG2_U32) \
+    $(wildcard include/config/ARCH_HAS_ILOG2_U64) \
+  /home/par/Documents/Learning/yocto-bbb/build-custom/tmp/work-shared/beaglebone-yocto/kernel-source/include/linux/bitops.h \
+  /home/par/Documents/Learning/yocto-bbb/build-custom/tmp/work-shared/beaglebone-yocto/kernel-source/include/linux/bits.h \
+  /home/par/Documents/Learning/yocto-bbb/build-custom/tmp/work-shared/beaglebone-yocto/kernel-source/include/vdso/bits.h \
+  /home/par/Documents/Learning/yocto-bbb/build-custom/tmp/work-shared/beaglebone-yocto/kernel-source/include/linux/typecheck.h \
+  /home/par/Documents/Learning/yocto-bbb/build-custom/tmp/work-shared/beaglebone-yocto/kernel-source/include/asm-generic/bitops/generic-non-atomic.h \
   /home/par/Documents/Learning/yocto-bbb/build-custom/tmp/work-shared/beaglebone-yocto/kernel-source/arch/arm/include/asm/bitops.h \
   /home/par/Documents/Learning/yocto-bbb/build-custom/tmp/work-shared/beaglebone-yocto/kernel-source/include/linux/irqflags.h \
+    $(wildcard include/config/PROVE_LOCKING) \
     $(wildcard include/config/TRACE_IRQFLAGS) \
     $(wildcard include/config/PREEMPT_RT) \
     $(wildcard include/config/IRQSOFF_TRACER) \
@@ -159,13 +183,11 @@ deps_/home/par/Documents/Learning/yocto-bbb/yocto_sandbox/kernel-driver/src/mpu6
   /home/par/Documents/Learning/yocto-bbb/build-custom/tmp/work-shared/beaglebone-yocto/kernel-source/arch/arm/include/asm/processor.h \
     $(wildcard include/config/HAVE_HW_BREAKPOINT) \
     $(wildcard include/config/BINFMT_ELF_FDPIC) \
+    $(wildcard include/config/MMU) \
   /home/par/Documents/Learning/yocto-bbb/build-custom/tmp/work-shared/beaglebone-yocto/kernel-source/arch/arm/include/asm/hw_breakpoint.h \
   /home/par/Documents/Learning/yocto-bbb/build-custom/tmp/work-shared/beaglebone-yocto/kernel-source/arch/arm/include/asm/unified.h \
   /home/par/Documents/Learning/yocto-bbb/build-custom/tmp/work-shared/beaglebone-yocto/kernel-source/arch/arm/include/asm/vdso/processor.h \
     $(wildcard include/config/ARM_ERRATA_754327) \
-  /home/par/Documents/Learning/yocto-bbb/build-custom/tmp/work-shared/beaglebone-yocto/kernel-source/arch/arm/include/asm/cache.h \
-    $(wildcard include/config/ARM_L1_CACHE_SHIFT) \
-    $(wildcard include/config/AEABI) \
   /home/par/Documents/Learning/yocto-bbb/build-custom/tmp/work-shared/beaglebone-yocto/kernel-source/arch/arm/include/asm/cmpxchg.h \
     $(wildcard include/config/CPU_SA1100) \
     $(wildcard include/config/CPU_SA110) \
@@ -187,83 +209,6 @@ deps_/home/par/Documents/Learning/yocto-bbb/yocto_sandbox/kernel-driver/src/mpu6
   /home/par/Documents/Learning/yocto-bbb/build-custom/tmp/work-shared/beaglebone-yocto/kernel-source/arch/arm/include/uapi/asm/swab.h \
   /home/par/Documents/Learning/yocto-bbb/build-custom/tmp/work-shared/beaglebone-yocto/kernel-source/include/linux/byteorder/generic.h \
   /home/par/Documents/Learning/yocto-bbb/build-custom/tmp/work-shared/beaglebone-yocto/kernel-source/include/asm-generic/bitops/ext2-atomic-setbit.h \
-  /home/par/Documents/Learning/yocto-bbb/build-custom/tmp/work-shared/beaglebone-yocto/kernel-source/include/linux/hex.h \
-  /home/par/Documents/Learning/yocto-bbb/build-custom/tmp/work-shared/beaglebone-yocto/kernel-source/include/linux/kstrtox.h \
-  /home/par/Documents/Learning/yocto-bbb/build-custom/tmp/work-shared/beaglebone-yocto/kernel-source/include/linux/log2.h \
-    $(wildcard include/config/ARCH_HAS_ILOG2_U32) \
-    $(wildcard include/config/ARCH_HAS_ILOG2_U64) \
-  /home/par/Documents/Learning/yocto-bbb/build-custom/tmp/work-shared/beaglebone-yocto/kernel-source/include/linux/math.h \
-  /home/par/Documents/Learning/yocto-bbb/build-custom/tmp/work-shared/beaglebone-yocto/kernel-source/arch/arm/include/asm/div64.h \
-  /home/par/Documents/Learning/yocto-bbb/build-custom/tmp/work-shared/beaglebone-yocto/kernel-source/arch/arm/include/asm/compiler.h \
-  /home/par/Documents/Learning/yocto-bbb/build-custom/tmp/work-shared/beaglebone-yocto/kernel-source/include/asm-generic/div64.h \
-  /home/par/Documents/Learning/yocto-bbb/build-custom/tmp/work-shared/beaglebone-yocto/kernel-source/include/linux/minmax.h \
-  /home/par/Documents/Learning/yocto-bbb/build-custom/tmp/work-shared/beaglebone-yocto/kernel-source/include/linux/panic.h \
-    $(wildcard include/config/PANIC_TIMEOUT) \
-  /home/par/Documents/Learning/yocto-bbb/build-custom/tmp/work-shared/beaglebone-yocto/kernel-source/include/linux/printk.h \
-    $(wildcard include/config/MESSAGE_LOGLEVEL_DEFAULT) \
-    $(wildcard include/config/CONSOLE_LOGLEVEL_DEFAULT) \
-    $(wildcard include/config/CONSOLE_LOGLEVEL_QUIET) \
-    $(wildcard include/config/EARLY_PRINTK) \
-    $(wildcard include/config/PRINTK) \
-    $(wildcard include/config/PRINTK_INDEX) \
-    $(wildcard include/config/DYNAMIC_DEBUG) \
-    $(wildcard include/config/DYNAMIC_DEBUG_CORE) \
-  /home/par/Documents/Learning/yocto-bbb/build-custom/tmp/work-shared/beaglebone-yocto/kernel-source/include/linux/kern_levels.h \
-  /home/par/Documents/Learning/yocto-bbb/build-custom/tmp/work-shared/beaglebone-yocto/kernel-source/include/linux/ratelimit_types.h \
-  /home/par/Documents/Learning/yocto-bbb/build-custom/tmp/work-shared/beaglebone-yocto/kernel-source/include/uapi/linux/param.h \
-  arch/arm/include/generated/uapi/asm/param.h \
-  /home/par/Documents/Learning/yocto-bbb/build-custom/tmp/work-shared/beaglebone-yocto/kernel-source/include/asm-generic/param.h \
-    $(wildcard include/config/HZ) \
-  /home/par/Documents/Learning/yocto-bbb/build-custom/tmp/work-shared/beaglebone-yocto/kernel-source/include/uapi/asm-generic/param.h \
-  /home/par/Documents/Learning/yocto-bbb/build-custom/tmp/work-shared/beaglebone-yocto/kernel-source/include/linux/spinlock_types_raw.h \
-    $(wildcard include/config/DEBUG_SPINLOCK) \
-    $(wildcard include/config/DEBUG_LOCK_ALLOC) \
-  /home/par/Documents/Learning/yocto-bbb/build-custom/tmp/work-shared/beaglebone-yocto/kernel-source/include/linux/spinlock_types_up.h \
-  /home/par/Documents/Learning/yocto-bbb/build-custom/tmp/work-shared/beaglebone-yocto/kernel-source/include/linux/lockdep_types.h \
-    $(wildcard include/config/PROVE_RAW_LOCK_NESTING) \
-    $(wildcard include/config/LOCKDEP) \
-    $(wildcard include/config/LOCK_STAT) \
-  /home/par/Documents/Learning/yocto-bbb/build-custom/tmp/work-shared/beaglebone-yocto/kernel-source/include/linux/once_lite.h \
-  /home/par/Documents/Learning/yocto-bbb/build-custom/tmp/work-shared/beaglebone-yocto/kernel-source/include/linux/sprintf.h \
-  /home/par/Documents/Learning/yocto-bbb/build-custom/tmp/work-shared/beaglebone-yocto/kernel-source/include/linux/static_call_types.h \
-    $(wildcard include/config/HAVE_STATIC_CALL) \
-    $(wildcard include/config/HAVE_STATIC_CALL_INLINE) \
-  /home/par/Documents/Learning/yocto-bbb/build-custom/tmp/work-shared/beaglebone-yocto/kernel-source/include/linux/instruction_pointer.h \
-  /home/par/Documents/Learning/yocto-bbb/build-custom/tmp/work-shared/beaglebone-yocto/kernel-source/include/linux/module.h \
-    $(wildcard include/config/MODULES) \
-    $(wildcard include/config/SYSFS) \
-    $(wildcard include/config/MODULES_TREE_LOOKUP) \
-    $(wildcard include/config/LIVEPATCH) \
-    $(wildcard include/config/STACKTRACE_BUILD_ID) \
-    $(wildcard include/config/ARCH_USES_CFI_TRAPS) \
-    $(wildcard include/config/MODULE_SIG) \
-    $(wildcard include/config/GENERIC_BUG) \
-    $(wildcard include/config/KALLSYMS) \
-    $(wildcard include/config/TRACEPOINTS) \
-    $(wildcard include/config/TREE_SRCU) \
-    $(wildcard include/config/BPF_EVENTS) \
-    $(wildcard include/config/DEBUG_INFO_BTF_MODULES) \
-    $(wildcard include/config/JUMP_LABEL) \
-    $(wildcard include/config/EVENT_TRACING) \
-    $(wildcard include/config/KPROBES) \
-    $(wildcard include/config/KUNIT) \
-    $(wildcard include/config/MODULE_UNLOAD) \
-    $(wildcard include/config/CONSTRUCTORS) \
-    $(wildcard include/config/FUNCTION_ERROR_INJECTION) \
-  /home/par/Documents/Learning/yocto-bbb/build-custom/tmp/work-shared/beaglebone-yocto/kernel-source/include/linux/list.h \
-    $(wildcard include/config/LIST_HARDENED) \
-    $(wildcard include/config/DEBUG_LIST) \
-  /home/par/Documents/Learning/yocto-bbb/build-custom/tmp/work-shared/beaglebone-yocto/kernel-source/include/linux/poison.h \
-    $(wildcard include/config/ILLEGAL_POINTER_VALUE) \
-  /home/par/Documents/Learning/yocto-bbb/build-custom/tmp/work-shared/beaglebone-yocto/kernel-source/include/linux/stat.h \
-  /home/par/Documents/Learning/yocto-bbb/build-custom/tmp/work-shared/beaglebone-yocto/kernel-source/arch/arm/include/uapi/asm/stat.h \
-  /home/par/Documents/Learning/yocto-bbb/build-custom/tmp/work-shared/beaglebone-yocto/kernel-source/include/uapi/linux/stat.h \
-  /home/par/Documents/Learning/yocto-bbb/build-custom/tmp/work-shared/beaglebone-yocto/kernel-source/include/linux/time.h \
-    $(wildcard include/config/POSIX_TIMERS) \
-  /home/par/Documents/Learning/yocto-bbb/build-custom/tmp/work-shared/beaglebone-yocto/kernel-source/include/linux/cache.h \
-    $(wildcard include/config/ARCH_HAS_CACHE_LINE_SIZE) \
-  /home/par/Documents/Learning/yocto-bbb/build-custom/tmp/work-shared/beaglebone-yocto/kernel-source/include/linux/math64.h \
-    $(wildcard include/config/ARCH_SUPPORTS_INT128) \
   /home/par/Documents/Learning/yocto-bbb/build-custom/tmp/work-shared/beaglebone-yocto/kernel-source/include/vdso/math64.h \
   /home/par/Documents/Learning/yocto-bbb/build-custom/tmp/work-shared/beaglebone-yocto/kernel-source/include/linux/time64.h \
   /home/par/Documents/Learning/yocto-bbb/build-custom/tmp/work-shared/beaglebone-yocto/kernel-source/include/vdso/time64.h \
@@ -272,6 +217,11 @@ deps_/home/par/Documents/Learning/yocto-bbb/yocto_sandbox/kernel-driver/src/mpu6
   /home/par/Documents/Learning/yocto-bbb/build-custom/tmp/work-shared/beaglebone-yocto/kernel-source/include/linux/time32.h \
   /home/par/Documents/Learning/yocto-bbb/build-custom/tmp/work-shared/beaglebone-yocto/kernel-source/include/linux/timex.h \
   /home/par/Documents/Learning/yocto-bbb/build-custom/tmp/work-shared/beaglebone-yocto/kernel-source/include/uapi/linux/timex.h \
+  /home/par/Documents/Learning/yocto-bbb/build-custom/tmp/work-shared/beaglebone-yocto/kernel-source/include/uapi/linux/param.h \
+  arch/arm/include/generated/uapi/asm/param.h \
+  /home/par/Documents/Learning/yocto-bbb/build-custom/tmp/work-shared/beaglebone-yocto/kernel-source/include/asm-generic/param.h \
+    $(wildcard include/config/HZ) \
+  /home/par/Documents/Learning/yocto-bbb/build-custom/tmp/work-shared/beaglebone-yocto/kernel-source/include/uapi/asm-generic/param.h \
   /home/par/Documents/Learning/yocto-bbb/build-custom/tmp/work-shared/beaglebone-yocto/kernel-source/arch/arm/include/asm/timex.h \
   /home/par/Documents/Learning/yocto-bbb/build-custom/tmp/work-shared/beaglebone-yocto/kernel-source/include/vdso/time32.h \
   /home/par/Documents/Learning/yocto-bbb/build-custom/tmp/work-shared/beaglebone-yocto/kernel-source/include/vdso/time.h \
@@ -310,6 +260,56 @@ deps_/home/par/Documents/Learning/yocto-bbb/yocto_sandbox/kernel-driver/src/mpu6
     $(wildcard include/config/HOTPLUG_CPU) \
     $(wildcard include/config/DEBUG_PER_CPU_MAPS) \
     $(wildcard include/config/CPUMASK_OFFSTACK) \
+  /home/par/Documents/Learning/yocto-bbb/build-custom/tmp/work-shared/beaglebone-yocto/kernel-source/include/linux/kernel.h \
+    $(wildcard include/config/PREEMPT_VOLUNTARY_BUILD) \
+    $(wildcard include/config/PREEMPT_DYNAMIC) \
+    $(wildcard include/config/HAVE_PREEMPT_DYNAMIC_CALL) \
+    $(wildcard include/config/HAVE_PREEMPT_DYNAMIC_KEY) \
+    $(wildcard include/config/PREEMPT_) \
+    $(wildcard include/config/DEBUG_ATOMIC_SLEEP) \
+  /home/par/Documents/Learning/yocto-bbb/build-custom/tmp/work-shared/beaglebone-yocto/kernel-source/include/linux/stdarg.h \
+  /home/par/Documents/Learning/yocto-bbb/build-custom/tmp/work-shared/beaglebone-yocto/kernel-source/include/linux/align.h \
+  /home/par/Documents/Learning/yocto-bbb/build-custom/tmp/work-shared/beaglebone-yocto/kernel-source/include/linux/limits.h \
+  /home/par/Documents/Learning/yocto-bbb/build-custom/tmp/work-shared/beaglebone-yocto/kernel-source/include/uapi/linux/limits.h \
+  /home/par/Documents/Learning/yocto-bbb/build-custom/tmp/work-shared/beaglebone-yocto/kernel-source/include/vdso/limits.h \
+  /home/par/Documents/Learning/yocto-bbb/build-custom/tmp/work-shared/beaglebone-yocto/kernel-source/include/linux/linkage.h \
+    $(wildcard include/config/ARCH_USE_SYM_ANNOTATIONS) \
+  /home/par/Documents/Learning/yocto-bbb/build-custom/tmp/work-shared/beaglebone-yocto/kernel-source/include/linux/stringify.h \
+  /home/par/Documents/Learning/yocto-bbb/build-custom/tmp/work-shared/beaglebone-yocto/kernel-source/include/linux/export.h \
+    $(wildcard include/config/MODVERSIONS) \
+  /home/par/Documents/Learning/yocto-bbb/build-custom/tmp/work-shared/beaglebone-yocto/kernel-source/arch/arm/include/asm/linkage.h \
+  /home/par/Documents/Learning/yocto-bbb/build-custom/tmp/work-shared/beaglebone-yocto/kernel-source/include/linux/hex.h \
+  /home/par/Documents/Learning/yocto-bbb/build-custom/tmp/work-shared/beaglebone-yocto/kernel-source/include/linux/kstrtox.h \
+  /home/par/Documents/Learning/yocto-bbb/build-custom/tmp/work-shared/beaglebone-yocto/kernel-source/include/linux/minmax.h \
+  /home/par/Documents/Learning/yocto-bbb/build-custom/tmp/work-shared/beaglebone-yocto/kernel-source/include/linux/panic.h \
+    $(wildcard include/config/PANIC_TIMEOUT) \
+  /home/par/Documents/Learning/yocto-bbb/build-custom/tmp/work-shared/beaglebone-yocto/kernel-source/include/linux/printk.h \
+    $(wildcard include/config/MESSAGE_LOGLEVEL_DEFAULT) \
+    $(wildcard include/config/CONSOLE_LOGLEVEL_DEFAULT) \
+    $(wildcard include/config/CONSOLE_LOGLEVEL_QUIET) \
+    $(wildcard include/config/EARLY_PRINTK) \
+    $(wildcard include/config/PRINTK) \
+    $(wildcard include/config/DYNAMIC_DEBUG) \
+  /home/par/Documents/Learning/yocto-bbb/build-custom/tmp/work-shared/beaglebone-yocto/kernel-source/include/linux/init.h \
+    $(wildcard include/config/HAVE_ARCH_PREL32_RELOCATIONS) \
+    $(wildcard include/config/STRICT_KERNEL_RWX) \
+    $(wildcard include/config/STRICT_MODULE_RWX) \
+    $(wildcard include/config/LTO_CLANG) \
+  /home/par/Documents/Learning/yocto-bbb/build-custom/tmp/work-shared/beaglebone-yocto/kernel-source/include/linux/kern_levels.h \
+  /home/par/Documents/Learning/yocto-bbb/build-custom/tmp/work-shared/beaglebone-yocto/kernel-source/include/linux/ratelimit_types.h \
+  /home/par/Documents/Learning/yocto-bbb/build-custom/tmp/work-shared/beaglebone-yocto/kernel-source/include/linux/spinlock_types_raw.h \
+    $(wildcard include/config/DEBUG_SPINLOCK) \
+    $(wildcard include/config/DEBUG_LOCK_ALLOC) \
+  /home/par/Documents/Learning/yocto-bbb/build-custom/tmp/work-shared/beaglebone-yocto/kernel-source/include/linux/spinlock_types_up.h \
+  /home/par/Documents/Learning/yocto-bbb/build-custom/tmp/work-shared/beaglebone-yocto/kernel-source/include/linux/lockdep_types.h \
+    $(wildcard include/config/PROVE_RAW_LOCK_NESTING) \
+    $(wildcard include/config/LOCKDEP) \
+    $(wildcard include/config/LOCK_STAT) \
+  /home/par/Documents/Learning/yocto-bbb/build-custom/tmp/work-shared/beaglebone-yocto/kernel-source/include/linux/once_lite.h \
+  /home/par/Documents/Learning/yocto-bbb/build-custom/tmp/work-shared/beaglebone-yocto/kernel-source/include/linux/sprintf.h \
+  /home/par/Documents/Learning/yocto-bbb/build-custom/tmp/work-shared/beaglebone-yocto/kernel-source/include/linux/static_call_types.h \
+    $(wildcard include/config/HAVE_STATIC_CALL) \
+  /home/par/Documents/Learning/yocto-bbb/build-custom/tmp/work-shared/beaglebone-yocto/kernel-source/include/linux/instruction_pointer.h \
   /home/par/Documents/Learning/yocto-bbb/build-custom/tmp/work-shared/beaglebone-yocto/kernel-source/include/linux/bitmap.h \
   /home/par/Documents/Learning/yocto-bbb/build-custom/tmp/work-shared/beaglebone-yocto/kernel-source/include/linux/find.h \
   /home/par/Documents/Learning/yocto-bbb/build-custom/tmp/work-shared/beaglebone-yocto/kernel-source/include/linux/string.h \

@@ -34,6 +34,7 @@ MODULE_INFO(retpoline, "Y");
 
 MODULE_INFO(depends, "");
 
-MODULE_ALIAS("i2c:mpu6050");
+MODULE_ALIAS("of:N*T*Cinvensense,mpu6050");
+MODULE_ALIAS("of:N*T*Cinvensense,mpu6050C*");
 
-MODULE_INFO(srcversion, "C1DE3EAA17F6AD6AEC848AA");
+MODULE_INFO(srcversion, "BAA84424214582305C76DDC");
