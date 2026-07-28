@@ -7,6 +7,10 @@
 #include <linux/types.h>
 #include <linux/kernel.h>
 #include <linux/math.h>
+#include <linux/fs.h>
+#include <linux/cdev.h>
+#include <linux/device.h>
+#include <linux/uaccess.h>
 
 #define MPU6050_REG_WHO_AM_I      0x75
 #define MPU6050_REG_PWR_MGMT_1    0x6B
@@ -32,8 +36,12 @@ struct mpu6050_sensor_data {
 struct mpu6050_data {
 	struct i2c_client *client;
 	struct mpu6050_sensor_data sensor;
-};
 
+	dev_t devt;
+	struct cdev cdev;
+	struct class *class;
+	struct device *device;
+};
 
 static int mpu6050_read_reg(struct mpu6050_data *data, u8 reg)
 {
@@ -49,7 +57,6 @@ static int mpu6050_read_reg(struct mpu6050_data *data, u8 reg)
 
 	return ret;
 }
-
 
 static int mpu6050_write_reg(struct mpu6050_data *data,
 			     u8 reg,
@@ -70,7 +77,6 @@ static int mpu6050_write_reg(struct mpu6050_data *data,
 	return ret;
 }
 
-
 static int mpu6050_read_block(struct mpu6050_data *data,
 			      u8 reg,
 			      u8 *buf,
@@ -89,7 +95,9 @@ static int mpu6050_read_block(struct mpu6050_data *data,
 	msgs[1].len = len;
 	msgs[1].buf = buf;
 
-	ret = i2c_transfer(data->client->adapter, msgs, 2);
+	ret = i2c_transfer(data->client->adapter,
+			   msgs,
+			   2);
 
 	if (ret != 2) {
 		if (ret >= 0)
@@ -104,7 +112,6 @@ static int mpu6050_read_block(struct mpu6050_data *data,
 
 	return 0;
 }
-
 
 static int mpu6050_init_device(struct mpu6050_data *data)
 {
@@ -146,9 +153,6 @@ static int mpu6050_init_device(struct mpu6050_data *data)
 	if (ret < 0)
 		return ret;
 
-	dev_info(&data->client->dev,
-		 "SLEEP bit cleared\n");
-
 	ret = mpu6050_read_reg(data,
 			       MPU6050_REG_PWR_MGMT_1);
 
@@ -165,14 +169,55 @@ static int mpu6050_init_device(struct mpu6050_data *data)
 	return 0;
 }
 
+static int mpu6050_read_sensor_data(struct mpu6050_data *data)
+{
+	u8 buf[MPU6050_SENSOR_DATA_LEN];
+	int ret;
+
+	ret = mpu6050_read_block(data,
+				 MPU6050_REG_SENSOR_DATA,
+				 buf,
+				 sizeof(buf));
+
+	if (ret)
+		return ret;
+
+
+	data->sensor.accel_x =
+		(s16)((buf[0] << 8) | buf[1]);
+
+	data->sensor.accel_y =
+		(s16)((buf[2] << 8) | buf[3]);
+
+	data->sensor.accel_z =
+		(s16)((buf[4] << 8) | buf[5]);
+
+
+	data->sensor.temperature =
+		(s16)((buf[6] << 8) | buf[7]);
+
+
+	data->sensor.gyro_x =
+		(s16)((buf[8] << 8) | buf[9]);
+
+	data->sensor.gyro_y =
+		(s16)((buf[10] << 8) | buf[11]);
+
+	data->sensor.gyro_z =
+		(s16)((buf[12] << 8) | buf[13]);
+
+
+	return 0;
+}
 
 static void mpu6050_print_sensor_data(struct mpu6050_data *data)
 {
 	int temp_mdeg_c;
 
 	temp_mdeg_c = 36530 +
-		      DIV_ROUND_CLOSEST((int)data->sensor.temperature * 1000,
-					340);
+		      DIV_ROUND_CLOSEST(
+				(int)data->sensor.temperature * 1000,
+				340);
 
 	dev_info(&data->client->dev,
 		 "Accel X=%d Y=%d Z=%d\n",
@@ -193,53 +238,160 @@ static void mpu6050_print_sensor_data(struct mpu6050_data *data)
 		 abs(temp_mdeg_c % 1000));
 }
 
+/*
+ * Character device interface
+ */
 
-static int mpu6050_read_sensor_data(struct mpu6050_data *data)
+static int mpu6050_open(struct inode *inode,
+			struct file *file)
 {
-	u8 buf[MPU6050_SENSOR_DATA_LEN];
-	int ret;
+	struct mpu6050_data *data;
 
-	ret = mpu6050_read_block(data,
-				 MPU6050_REG_SENSOR_DATA,
-				 buf,
-				 sizeof(buf));
+	data = container_of(inode->i_cdev,
+			    struct mpu6050_data,
+			    cdev);
 
-	if (ret)
-		return ret;
-
-	data->sensor.accel_x =
-		(s16)((buf[0] << 8) | buf[1]);
-
-	data->sensor.accel_y =
-		(s16)((buf[2] << 8) | buf[3]);
-
-	data->sensor.accel_z =
-		(s16)((buf[4] << 8) | buf[5]);
-
-	data->sensor.temperature =
-		(s16)((buf[6] << 8) | buf[7]);
-
-	data->sensor.gyro_x =
-		(s16)((buf[8] << 8) | buf[9]);
-
-	data->sensor.gyro_y =
-		(s16)((buf[10] << 8) | buf[11]);
-
-	data->sensor.gyro_z =
-		(s16)((buf[12] << 8) | buf[13]);
-
-	mpu6050_print_sensor_data(data);
+	file->private_data = data;
 
 	return 0;
 }
 
+static ssize_t mpu6050_read(struct file *file,
+			    char __user *buf,
+			    size_t count,
+			    loff_t *ppos)
+{
+	struct mpu6050_data *data;
+	char buffer[256];
+	int len;
+
+	data = file->private_data;
+
+
+	if (*ppos != 0)
+		return 0;
+
+
+	len = snprintf(buffer,
+		       sizeof(buffer),
+		       "Accel X=%d Y=%d Z=%d\n"
+		       "Gyro X=%d Y=%d Z=%d\n"
+		       "Temperature raw=%d\n",
+		       data->sensor.accel_x,
+		       data->sensor.accel_y,
+		       data->sensor.accel_z,
+		       data->sensor.gyro_x,
+		       data->sensor.gyro_y,
+		       data->sensor.gyro_z,
+		       data->sensor.temperature);
+
+
+	if (copy_to_user(buf,
+			 buffer,
+			 len))
+		return -EFAULT;
+
+
+	*ppos += len;
+
+	return len;
+}
+
+static int mpu6050_release(struct inode *inode,
+			   struct file *file)
+{
+	return 0;
+}
+
+static const struct file_operations mpu6050_fops = {
+	.owner = THIS_MODULE,
+	.open = mpu6050_open,
+	.read = mpu6050_read,
+	.release = mpu6050_release,
+};
+
+static int mpu6050_create_char_device(struct mpu6050_data *data)
+{
+	int ret;
+
+	ret = alloc_chrdev_region(&data->devt,
+				  0,
+				  1,
+				  "mpu6050");
+
+	if (ret)
+		return ret;
+
+
+	cdev_init(&data->cdev,
+		  &mpu6050_fops);
+
+	data->cdev.owner = THIS_MODULE;
+
+
+	ret = cdev_add(&data->cdev,
+		       data->devt,
+		       1);
+
+	if (ret)
+		goto unregister;
+
+
+	data->class = class_create("mpu6050");
+
+	if (IS_ERR(data->class)) {
+		ret = PTR_ERR(data->class);
+		goto del_cdev;
+	}
+
+
+	data->device = device_create(data->class,
+				     NULL,
+				     data->devt,
+				     NULL,
+				     "mpu6050");
+
+	if (IS_ERR(data->device)) {
+		ret = PTR_ERR(data->device);
+		goto destroy_class;
+	}
+
+
+	return 0;
+
+
+destroy_class:
+	class_destroy(data->class);
+
+del_cdev:
+	cdev_del(&data->cdev);
+
+unregister:
+	unregister_chrdev_region(data->devt, 1);
+
+	return ret;
+}
+
+static void mpu6050_destroy_char_device(struct mpu6050_data *data)
+{
+	device_destroy(data->class,
+		       data->devt);
+
+	class_destroy(data->class);
+
+	cdev_del(&data->cdev);
+
+	unregister_chrdev_region(data->devt, 1);
+}
 
 static int mpu6050_probe(struct i2c_client *client)
 {
 	struct mpu6050_data *data;
 	int ret;
 
-	dev_info(&client->dev, "probe called\n");
+	dev_info(&client->dev,
+		 "probe called\n");
+
 
 	data = devm_kzalloc(&client->dev,
 			    sizeof(*data),
@@ -248,27 +400,50 @@ static int mpu6050_probe(struct i2c_client *client)
 	if (!data)
 		return -ENOMEM;
 
+
 	data->client = client;
 
 	i2c_set_clientdata(client, data);
+
 
 	ret = mpu6050_init_device(data);
 	if (ret)
 		return ret;
 
+
 	ret = mpu6050_read_sensor_data(data);
 	if (ret)
 		return ret;
 
+
+	mpu6050_print_sensor_data(data);
+
+
+	ret = mpu6050_create_char_device(data);
+	if (ret)
+		return ret;
+
+
+	dev_info(&client->dev,
+		 "Character device created\n");
+
+
 	return 0;
 }
 
-
 static void mpu6050_remove(struct i2c_client *client)
 {
-	dev_info(&client->dev, "remove called\n");
-}
+	struct mpu6050_data *data;
 
+	data = i2c_get_clientdata(client);
+
+
+	mpu6050_destroy_char_device(data);
+
+
+	dev_info(&client->dev,
+		 "remove called\n");
+}
 
 static const struct of_device_id mpu6050_of_match[] = {
 	{
@@ -279,21 +454,19 @@ static const struct of_device_id mpu6050_of_match[] = {
 
 MODULE_DEVICE_TABLE(of, mpu6050_of_match);
 
-
 static struct i2c_driver mpu6050_driver = {
 	.driver = {
 		.name = "mpu6050",
 		.of_match_table = mpu6050_of_match,
 	},
+
 	.probe = mpu6050_probe,
 	.remove = mpu6050_remove,
 };
 
-
 module_i2c_driver(mpu6050_driver);
-
 
 MODULE_LICENSE("GPL");
 MODULE_AUTHOR("Parastoo");
-MODULE_DESCRIPTION("MPU6050 I2C Driver");
-MODULE_VERSION("0.3");
+MODULE_DESCRIPTION("MPU6050 I2C Driver with Character Device");
+MODULE_VERSION("0.4");

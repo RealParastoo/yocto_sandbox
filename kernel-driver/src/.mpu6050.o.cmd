@@ -1242,6 +1242,7 @@ deps_/home/par/Documents/Learning/yocto-bbb/yocto_sandbox/kernel-driver/src/mpu6
     $(wildcard include/config/OF_NUMA) \
     $(wildcard include/config/OF_OVERLAY) \
   /home/par/Documents/Learning/yocto-bbb/build-custom/tmp/work-shared/beaglebone-yocto/kernel-source/include/uapi/linux/i2c.h \
+  /home/par/Documents/Learning/yocto-bbb/build-custom/tmp/work-shared/beaglebone-yocto/kernel-source/include/linux/cdev.h \
 
 /home/par/Documents/Learning/yocto-bbb/yocto_sandbox/kernel-driver/src/mpu6050.o: $(deps_/home/par/Documents/Learning/yocto-bbb/yocto_sandbox/kernel-driver/src/mpu6050.o)
 
