@@ -37,4 +37,4 @@ MODULE_INFO(depends, "");
 MODULE_ALIAS("of:N*T*Cinvensense,mpu6050");
 MODULE_ALIAS("of:N*T*Cinvensense,mpu6050C*");
 
-MODULE_INFO(srcversion, "0806DD6316F4DF56E5FB62F");
+MODULE_INFO(srcversion, "F08B6E3C7F0AC00C1B4320F");

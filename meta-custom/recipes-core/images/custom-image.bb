@@ -5,7 +5,7 @@ LICENSE = "MIT"
 inherit core-image
 inherit extrausers
 
-IMAGE_INSTALL:append = " i2c-tools mpu6050-reader rtl8821cu linux-firmware-rtl8821 "
+IMAGE_INSTALL:append = " i2c-tools mpu6050-reader rtl8821cu linux-firmware-rtl8821 sensor-service mpu6050 "
 
 IMAGE_OVERHEAD_FACTOR ?= "1.0"
 IMAGE_ROOTFS_SIZE ?= "204800"
