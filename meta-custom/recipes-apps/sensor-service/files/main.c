@@ -101,14 +101,71 @@ void *sensor_thread(void *arg)
     return NULL;
 }
 
+
 void *http_thread(void *arg)
 {
     int server_fd;
     int client_fd;
 
     struct sockaddr_in server;
-    char response[512];
+
+    char response[4096];
     char request[1024];
+
+
+    const char *html =
+        "<!DOCTYPE html>"
+        "<html>"
+        "<head>"
+        "<title>MPU6050 Dashboard</title>"
+        "</head>"
+
+        "<body>"
+
+        "<h1>MPU6050 Sensor Dashboard</h1>"
+
+        "<p>Accel X: <span id='accel_x'>--</span></p>"
+        "<p>Accel Y: <span id='accel_y'>--</span></p>"
+        "<p>Accel Z: <span id='accel_z'>--</span></p>"
+
+        "<p>Gyro X: <span id='gyro_x'>--</span></p>"
+        "<p>Gyro Y: <span id='gyro_y'>--</span></p>"
+        "<p>Gyro Z: <span id='gyro_z'>--</span></p>"
+
+        "<p>Temperature raw: "
+        "<span id='temperature_raw'>--</span></p>"
+
+
+        "<script>"
+
+        "function updateSensor(){"
+
+        "fetch('/sensor')"
+        ".then(r=>r.json())"
+        ".then(d=>{"
+
+        "document.getElementById('accel_x').innerHTML=d.accel_x;"
+        "document.getElementById('accel_y').innerHTML=d.accel_y;"
+        "document.getElementById('accel_z').innerHTML=d.accel_z;"
+
+        "document.getElementById('gyro_x').innerHTML=d.gyro_x;"
+        "document.getElementById('gyro_y').innerHTML=d.gyro_y;"
+        "document.getElementById('gyro_z').innerHTML=d.gyro_z;"
+
+        "document.getElementById('temperature_raw').innerHTML=d.temperature_raw;"
+
+        "});"
+
+        "}"
+
+        "setInterval(updateSensor,1000);"
+        "updateSensor();"
+
+        "</script>"
+
+        "</body>"
+        "</html>";
+
 
     server_fd = socket(AF_INET,
                        SOCK_STREAM,
@@ -119,9 +176,11 @@ void *http_thread(void *arg)
         return NULL;
     }
 
+
     server.sin_family = AF_INET;
     server.sin_addr.s_addr = INADDR_ANY;
     server.sin_port = htons(PORT);
+
 
     if (bind(server_fd,
              (struct sockaddr *)&server,
@@ -132,111 +191,173 @@ void *http_thread(void *arg)
         return NULL;
     }
 
-    listen(server_fd, 5);
+
+    listen(server_fd,5);
+
 
     printf("HTTP server listening on port %d\n", PORT);
 
 
-    while (1) {
+    while(1)
+    {
 
         client_fd = accept(server_fd,
                            NULL,
                            NULL);
 
-        if (client_fd < 0)
+
+        if(client_fd < 0)
             continue;
 
 
-        /* Read HTTP request */
         int len = recv(client_fd,
                        request,
-                       sizeof(request) - 1,
+                       sizeof(request)-1,
                        0);
 
-        if (len <= 0) {
+
+        if(len <= 0)
+        {
             close(client_fd);
             continue;
         }
 
-        request[len] = '\0';
 
-        printf("Request:\n%s\n", request);
-
+        request[len]='\0';
 
 
-        /* Sensor variables */
-        int accel_x;
-        int accel_y;
-        int accel_z;
-
-        int gyro_x;
-        int gyro_y;
-        int gyro_z;
-
-        int temperature_raw;
-
-
-        pthread_mutex_lock(&sensor_mutex);
-
-
-        int parsed = sscanf(
-            latest_sensor.text,
-            "Accel X=%d Y=%d Z=%d\n"
-            "Gyro X=%d Y=%d Z=%d\n"
-            "Temperature raw=%d",
-            &accel_x,
-            &accel_y,
-            &accel_z,
-            &gyro_x,
-            &gyro_y,
-            &gyro_z,
-            &temperature_raw
-        );
-
-
-        pthread_mutex_unlock(&sensor_mutex);
+        printf("Request:\n%s\n",request);
 
 
 
-        if (parsed != 7) {
-
-            printf("Sensor parse failed: %d fields\n", parsed);
+        /*
+         * Root page
+         */
+        if(strncmp(request,
+                   "GET / ",
+                   6)==0)
+        {
 
             snprintf(response,
                      sizeof(response),
-                     "HTTP/1.1 500 Internal Server Error\r\n"
-                     "Content-Type: application/json\r\n"
+
+                     "HTTP/1.1 200 OK\r\n"
+                     "Content-Type: text/html\r\n"
                      "Connection: close\r\n"
                      "\r\n"
-                     "{ \"error\": \"sensor parse failed\" }\n");
+                     "%s",
+                     html);
 
         }
-        else {
 
-            printf("Sensor parsed successfully\n");
+
+        /*
+         * Sensor API
+         */
+        else if(strncmp(request,
+                        "GET /sensor ",
+                        12)==0)
+        {
+
+            int accel_x;
+            int accel_y;
+            int accel_z;
+
+            int gyro_x;
+            int gyro_y;
+            int gyro_z;
+
+            int temperature_raw;
+
+
+
+            pthread_mutex_lock(&sensor_mutex);
+
+
+            int parsed = sscanf(
+                latest_sensor.text,
+
+                "Accel X=%d Y=%d Z=%d\n"
+                "Gyro X=%d Y=%d Z=%d\n"
+                "Temperature raw=%d",
+
+                &accel_x,
+                &accel_y,
+                &accel_z,
+
+                &gyro_x,
+                &gyro_y,
+                &gyro_z,
+
+                &temperature_raw);
+
+
+            pthread_mutex_unlock(&sensor_mutex);
+
+
+
+            if(parsed == 7)
+            {
+
+                snprintf(response,
+                         sizeof(response),
+
+                         "HTTP/1.1 200 OK\r\n"
+                         "Content-Type: application/json\r\n"
+                         "Connection: close\r\n"
+                         "\r\n"
+
+                         "{\n"
+                         "\"accel_x\":%d,\n"
+                         "\"accel_y\":%d,\n"
+                         "\"accel_z\":%d,\n"
+                         "\"gyro_x\":%d,\n"
+                         "\"gyro_y\":%d,\n"
+                         "\"gyro_z\":%d,\n"
+                         "\"temperature_raw\":%d\n"
+                         "}\n",
+
+                         accel_x,
+                         accel_y,
+                         accel_z,
+
+                         gyro_x,
+                         gyro_y,
+                         gyro_z,
+
+                         temperature_raw);
+
+            }
+            else
+            {
+
+                snprintf(response,
+                         sizeof(response),
+
+                         "HTTP/1.1 500 Internal Server Error\r\n"
+                         "Content-Type: application/json\r\n"
+                         "\r\n"
+                         "{\"error\":\"parse failed\"}\n");
+            }
+
+        }
+
+
+        /*
+         * Not found
+         */
+        else
+        {
 
             snprintf(response,
                      sizeof(response),
-                     "HTTP/1.1 200 OK\r\n"
-                     "Content-Type: application/json\r\n"
+
+                     "HTTP/1.1 404 Not Found\r\n"
+                     "Content-Type: text/plain\r\n"
                      "Connection: close\r\n"
                      "\r\n"
-                     "{\n"
-                     "  \"accel_x\": %d,\n"
-                     "  \"accel_y\": %d,\n"
-                     "  \"accel_z\": %d,\n"
-                     "  \"gyro_x\": %d,\n"
-                     "  \"gyro_y\": %d,\n"
-                     "  \"gyro_z\": %d,\n"
-                     "  \"temperature_raw\": %d\n"
-                     "}\n",
-                     accel_x,
-                     accel_y,
-                     accel_z,
-                     gyro_x,
-                     gyro_y,
-                     gyro_z,
-                     temperature_raw);
+                     "404 Not Found\n");
+
         }
 
 
@@ -247,13 +368,13 @@ void *http_thread(void *arg)
 
 
         close(client_fd);
+
     }
 
 
-    close(server_fd);
-
     return NULL;
 }
+
 
 int main(void)
 {
