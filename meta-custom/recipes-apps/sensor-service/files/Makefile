@@ -1,4 +1,4 @@
-CFLAGS += -Wall -O2
+CFLAGS += -Wall -O2 -pthread
 
 TARGET := sensor-service
 SRC := main.c
