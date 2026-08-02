@@ -7,6 +7,7 @@ SRC_URI = " \
     file://main.c \
     file://Makefile \
     file://LICENSE \
+    file://index.html \
 "
 
 S = "${WORKDIR}"
@@ -16,8 +17,18 @@ do_compile() {
 }
 
 do_install() {
+
     install -d ${D}${bindir}
 
     install -m 0755 sensor-service \
         ${D}${bindir}/sensor-service
+
+
+    install -d ${D}${datadir}/sensor-dashboard
+
+    install -m 0644 ${WORKDIR}/index.html \
+        ${D}${datadir}/sensor-dashboard/index.html
 }
+
+
+FILES:${PN} += "${datadir}/sensor-dashboard/index.html"

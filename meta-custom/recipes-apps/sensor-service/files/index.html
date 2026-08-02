@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>MPU6050 Dashboard</title>
+</head>
+
+<body>
+
+<h1>MPU6050 Sensor Dashboard</h1>
+
+<p>Accel X: <span id="accel_x">--</span></p>
+<p>Accel Y: <span id="accel_y">--</span></p>
+<p>Accel Z: <span id="accel_z">--</span></p>
+
+<p>Gyro X: <span id="gyro_x">--</span></p>
+<p>Gyro Y: <span id="gyro_y">--</span></p>
+<p>Gyro Z: <span id="gyro_z">--</span></p>
+
+<p>Temperature raw:
+<span id="temperature_raw">--</span></p>
+
+
+<script>
+
+function updateSensor()
+{
+    fetch("/sensor")
+    .then(response => response.json())
+    .then(data => {
+
+        document.getElementById("accel_x").innerHTML =
+            data.accel_x;
+
+        document.getElementById("accel_y").innerHTML =
+            data.accel_y;
+
+        document.getElementById("accel_z").innerHTML =
+            data.accel_z;
+
+
+        document.getElementById("gyro_x").innerHTML =
+            data.gyro_x;
+
+        document.getElementById("gyro_y").innerHTML =
+            data.gyro_y;
+
+        document.getElementById("gyro_z").innerHTML =
+            data.gyro_z;
+
+
+        document.getElementById("temperature_raw").innerHTML =
+            data.temperature_raw;
+
+    });
+}
+
+
+setInterval(updateSensor,1000);
+
+updateSensor();
+
+</script>
+
+</body>
+
+</html>
